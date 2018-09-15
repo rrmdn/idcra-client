@@ -24,6 +24,7 @@ import './App.css';
 import RegisterPage from './Pages/Register/RegisterPage';
 import LoginPage from './Pages/Login/LoginPage';
 import SchoolPage from './Pages/School/SchoolPage';
+import StudentPage from './Pages/Student/StudentPage';
 
 const NavigationLink = (props: {
   to: string,
@@ -194,7 +195,10 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
           <div className={classes.root}>
             <AppBar
               position="absolute"
-              className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+              className={classNames(
+                classes.appBar,
+                cookie.get('token') && this.state.open && classes.appBarShift
+              )}
             >
               <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
                 <IconButton
@@ -216,29 +220,32 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
                 </IconButton>
               </Toolbar>
             </AppBar>
-            <Drawer
-              variant="permanent"
-              classes={{
-                paper: classNames(
-                  classes.drawerPaper,
-                  !this.state.open && classes.drawerPaperClose
-                ),
-              }}
-              open={this.state.open}
-            >
-              <div className={classes.toolbarIcon}>
-                <IconButton onClick={this.handleDrawerClose}>
-                  <Icon>chevron_left</Icon>
-                </IconButton>
-              </div>
-              <Divider />
-              <List>{mainListItems}</List>
-            </Drawer>
+            {cookie.get('token') ? (
+              <Drawer
+                variant="permanent"
+                classes={{
+                  paper: classNames(
+                    classes.drawerPaper,
+                    !this.state.open && classes.drawerPaperClose
+                  ),
+                }}
+                open={this.state.open}
+              >
+                <div className={classes.toolbarIcon}>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    <Icon>chevron_left</Icon>
+                  </IconButton>
+                </div>
+                <Divider />
+                <List>{mainListItems}</List>
+              </Drawer>
+            ) : null}
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />
               <Switch>
                 <PrivateRoute path="/" exact component={Home} />
                 <PrivateRoute path="/schools" exact component={SchoolPage} />
+                <PrivateRoute path="/students" exact component={StudentPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
               </Switch>

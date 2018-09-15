@@ -161,6 +161,81 @@ export type schoolsVariables = {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: createStudent
+// ====================================================
+
+export type createStudent_createStudent = {
+  __typename: "Student",
+  id: string,
+  name: ?string,
+  dateOfBirth: ?any,
+  schoolId: string,
+  createdAt: ?any,
+};
+
+export type createStudent = {
+  createStudent: ?createStudent_createStudent
+};
+
+export type createStudentVariables = {
+  name: string,
+  schoolID: string,
+  dateOfBirth: string,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: students
+// ====================================================
+
+export type students_students_edges_node = {
+  __typename: "Student",
+  id: string,
+  name: ?string,
+  dateOfBirth: ?any,
+  schoolId: string,
+  createdAt: ?any,
+};
+
+export type students_students_edges = {
+  __typename: "StudentsEdge",
+  cursor: string,
+  node: ?students_students_edges_node,
+};
+
+export type students_students_pageInfo = {
+  __typename: "PageInfo",
+  startCursor: ?string,
+  endCursor: ?string,
+  hasNextPage: boolean,
+};
+
+export type students_students = {
+  __typename: "StudentsConnection",
+  totalCount: number,
+  edges: ?Array<?students_students_edges>,
+  pageInfo: students_students_pageInfo,
+};
+
+export type students = {
+  students: students_students
+};
+
+export type studentsVariables = {
+  first: number,
+  after?: ?string,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: PageInfo
 // ====================================================
 
