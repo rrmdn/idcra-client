@@ -81,7 +81,7 @@ class LoginPage extends Component<
           // temporal hack to render logged-in user
           cookie.set('email', this.state.email, {expires: 7});
           cookie.set('token', accessToken, {expires: 7});
-          this.props.history.push('/');
+          window.location = '/';
         }
       }
     } catch (error) {

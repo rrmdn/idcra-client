@@ -22,8 +22,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp ./build/index.html ./build/200.html",
     "test": "react-scripts test --env=jsdom",
+    "deploy": "surge build idcra-client.surge.sh",
     "eject": "react-scripts eject",
     "codegen:sync": "apollo-codegen introspect-schema http://idcra.radityakertiyasa.com:3000/query --output schema.json",
     "codegen:run": "apollo-codegen generate src/Fragments/*.js src/Pages/**/*.js --schema schema.json --tag-name gql --target flow --output operation-result-types.flow.js --add-typename"
