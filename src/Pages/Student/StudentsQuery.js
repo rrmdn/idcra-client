@@ -8,8 +8,8 @@ import Student from '../../Fragments/Student';
 
 export default class StudentsQuery extends Query<students, studentsVariables> {
   static query = gql`
-    query students($first: Int!, $after: String) {
-      students(first: $first, after: $after) {
+    query students($first: Int!, $after: String, $schoolID: String, $keyword: String) {
+      students(first: $first, after: $after, schoolID: $schoolID, keyword: $keyword) {
         totalCount
         edges {
           cursor

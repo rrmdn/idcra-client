@@ -18,6 +18,7 @@ import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment-timezone';
+import debounce from 'debounce';
 import SchoolsQuery from '../School/SchoolQuery';
 import linkState from 'linkstate';
 import StudentsQuery from './StudentsQuery';
@@ -40,12 +41,14 @@ class StudentPage extends React.Component<
     activeSchoolId: string,
     name: string,
     dateOfBirth: string,
+    searchStudentName: string,
   }
 > {
   state = {
     activeSchoolId: '',
     name: '',
     dateOfBirth: '',
+    searchStudentName: '',
   };
   render = () => {
     // $FlowFixMe
@@ -59,7 +62,11 @@ class StudentPage extends React.Component<
           <StudentsQuery
             skip={!this.state.activeSchoolId}
             query={StudentsQuery.query}
-            variables={{first: 30, schoolId: this.state.activeSchoolId}}
+            variables={{
+              first: 30,
+              schoolID: this.state.activeSchoolId,
+              keyword: this.state.searchStudentName,
+            }}
           >
             {({data: studentsData, refetch: refetchStudents}) => (
               <div>
@@ -105,7 +112,11 @@ class StudentPage extends React.Component<
                       <form display={{display: 'flex', flexWrap: 'wrap'}}>
                         <FormControl style={{margin: 10}} disabled={!this.state.activeSchoolId}>
                           <InputLabel htmlFor="student-name">Name</InputLabel>
-                          <Input id="student-name" onChange={linkState(this, 'name')} />
+                          <Input
+                            value={this.state.name}
+                            id="student-name"
+                            onChange={linkState(this, 'name')}
+                          />
                         </FormControl>
                         <FormControl
                           style={{margin: 10}}
@@ -113,7 +124,11 @@ class StudentPage extends React.Component<
                           disabled={!this.state.activeSchoolId}
                         >
                           <InputLabel htmlFor="student-dob">Date of Birth</InputLabel>
-                          <Input id="student-dob" onChange={linkState(this, 'dateOfBirth')} />
+                          <Input
+                            value={this.state.dateOfBirth}
+                            id="student-dob"
+                            onChange={linkState(this, 'dateOfBirth')}
+                          />
                           <FormHelperText>DD-MM-YYYY</FormHelperText>
                         </FormControl>
                         <Button
@@ -132,7 +147,9 @@ class StudentPage extends React.Component<
                               variables: {
                                 name: this.state.name,
                                 schoolID: this.state.activeSchoolId,
-                                dateOfBirth: moment(this.state.dateOfBirth, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                                dateOfBirth: moment(this.state.dateOfBirth, 'DD-MM-YYYY').format(
+                                  'YYYY-MM-DD'
+                                ),
                               },
                             }).then(() => {
                               this.setState({name: '', dateOfBirth: ''});
@@ -148,10 +165,19 @@ class StudentPage extends React.Component<
                 </CreateStudentMutation>
 
                 <Paper className={classes.root}>
-                  <Toolbar>
+                  <Toolbar
+                    style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                  >
                     <Typography variant="title" id="tableTitle">
                       Students
                     </Typography>
+                    <FormControl disabled={!this.state.activeSchoolId}>
+                      <InputLabel htmlFor="search-student-name">Search Student Name</InputLabel>
+                      <Input
+                        id="search-student-name"
+                        onChange={debounce(linkState(this, 'searchStudentName'), 200, true)}
+                      />
+                    </FormControl>
                   </Toolbar>
                   <Table className={classes.table}>
                     <TableHead>

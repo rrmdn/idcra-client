@@ -9,6 +9,7 @@
     "apollo-client": "^2.4.1",
     "apollo-link-http": "^1.5.4",
     "axios": "^0.18.0",
+    "debounce": "^1.2.0",
     "graphql": "0.13.2",
     "graphql-tag": "^2.9.2",
     "js-cookie": "^2.2.0",
