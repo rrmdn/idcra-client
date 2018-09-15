@@ -1,0 +1,37 @@
+{
+  "name": "idcra-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.0.3",
+    "apollo-boost": "^0.1.16",
+    "apollo-cache-inmemory": "^1.2.9",
+    "apollo-client": "^2.4.1",
+    "apollo-link-http": "^1.5.4",
+    "axios": "^0.18.0",
+    "graphql": "0.13.2",
+    "graphql-tag": "^2.9.2",
+    "js-cookie": "^2.2.0",
+    "linkstate": "^1.1.1",
+    "moment-timezone": "^0.5.21",
+    "react": "^16.5.0",
+    "react-apollo": "^2.1.11",
+    "react-dom": "^16.5.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "codegen:sync": "apollo-codegen introspect-schema http://idcra.radityakertiyasa.com:3000/query --output schema.json",
+    "codegen:run": "apollo-codegen generate src/Fragments/*.js src/Pages/**/*.js --schema schema.json --tag-name gql --target flow --output operation-result-types.flow.js --add-typename"
+  },
+  "devDependencies": {
+    "apollo": "^1.9.2",
+    "apollo-codegen": "^0.20.2",
+    "flow-bin": "0.58",
+    "graphql-code-generator": "^0.11.0"
+  }
+}
