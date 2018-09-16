@@ -228,6 +228,174 @@ export type students = {
 export type studentsVariables = {
   first: number,
   after?: ?string,
+  schoolID?: ?string,
+  keyword?: ?string,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createSurvey
+// ====================================================
+
+export type createSurvey_createSurvey_cases = {
+  __typename: "Case",
+  id: string,
+  surveyId: ?string,
+  toothNumber: ?number,
+  diagnosisAndActionId: ?string,
+  createdAt: ?any,
+};
+
+export type createSurvey_createSurvey = {
+  __typename: "Survey",
+  id: string,
+  studentId: ?string,
+  surveyorId: ?string,
+  date: ?any,
+  s1q1: ?string,
+  s1q2: ?string,
+  s1q3: ?string,
+  s1q4: ?string,
+  s1q5: ?string,
+  s1q6: ?string,
+  s1q7: ?string,
+  s2q1: ?string,
+  s2q2: ?string,
+  s2q3: ?string,
+  s2q4: ?string,
+  s2q5: ?string,
+  s2q6: ?string,
+  s2q7: ?string,
+  s2q8: ?string,
+  s2q9: ?string,
+  lowerD: ?number,
+  lowerE: ?number,
+  lowerF: ?number,
+  upperD: ?number,
+  upperM: ?number,
+  upperF: ?number,
+  subjectiveScore: ?number,
+  createdAt: ?any,
+  cases: ?Array<?createSurvey_createSurvey_cases>,
+};
+
+export type createSurvey = {
+  createSurvey: createSurvey_createSurvey
+};
+
+export type createSurveyVariables = {
+  survey: SurveyInput
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: diagnosisAndActions
+// ====================================================
+
+export type diagnosisAndActions_diagnosisAndActions_edges_node = {
+  __typename: "DiagnosisAndAction",
+  id: string,
+  diagnosis: ?string,
+  action: ?string,
+  createdAt: ?any,
+};
+
+export type diagnosisAndActions_diagnosisAndActions_edges = {
+  __typename: "DiagnosisAndActionsEdge",
+  cursor: string,
+  node: ?diagnosisAndActions_diagnosisAndActions_edges_node,
+};
+
+export type diagnosisAndActions_diagnosisAndActions_pageInfo = {
+  __typename: "PageInfo",
+  startCursor: ?string,
+  endCursor: ?string,
+  hasNextPage: boolean,
+};
+
+export type diagnosisAndActions_diagnosisAndActions = {
+  __typename: "DiagnosisAndActionsConnection",
+  totalCount: number,
+  edges: ?Array<?diagnosisAndActions_diagnosisAndActions_edges>,
+  pageInfo: diagnosisAndActions_diagnosisAndActions_pageInfo,
+};
+
+export type diagnosisAndActions = {
+  diagnosisAndActions: diagnosisAndActions_diagnosisAndActions
+};
+
+export type diagnosisAndActionsVariables = {
+  first: number,
+  after?: ?string,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: student
+// ====================================================
+
+export type student_student = {
+  __typename: "Student",
+  id: string,
+  name: ?string,
+  dateOfBirth: ?any,
+  schoolId: string,
+  createdAt: ?any,
+};
+
+export type student = {
+  student: ?student_student
+};
+
+export type studentVariables = {
+  id: string
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Case
+// ====================================================
+
+export type Case = {
+  __typename: "Case",
+  id: string,
+  surveyId: ?string,
+  toothNumber: ?number,
+  diagnosisAndActionId: ?string,
+  createdAt: ?any,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: DiagnosisAndAction
+// ====================================================
+
+export type DiagnosisAndAction = {
+  __typename: "DiagnosisAndAction",
+  id: string,
+  diagnosis: ?string,
+  action: ?string,
+  createdAt: ?any,
 };
 
 
@@ -296,6 +464,57 @@ export type Student = {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL fragment: Survey
+// ====================================================
+
+export type Survey_cases = {
+  __typename: "Case",
+  id: string,
+  surveyId: ?string,
+  toothNumber: ?number,
+  diagnosisAndActionId: ?string,
+  createdAt: ?any,
+};
+
+export type Survey = {
+  __typename: "Survey",
+  id: string,
+  studentId: ?string,
+  surveyorId: ?string,
+  date: ?any,
+  s1q1: ?string,
+  s1q2: ?string,
+  s1q3: ?string,
+  s1q4: ?string,
+  s1q5: ?string,
+  s1q6: ?string,
+  s1q7: ?string,
+  s2q1: ?string,
+  s2q2: ?string,
+  s2q3: ?string,
+  s2q4: ?string,
+  s2q5: ?string,
+  s2q6: ?string,
+  s2q7: ?string,
+  s2q8: ?string,
+  s2q9: ?string,
+  lowerD: ?number,
+  lowerE: ?number,
+  lowerF: ?number,
+  upperD: ?number,
+  upperM: ?number,
+  upperF: ?number,
+  subjectiveScore: ?number,
+  createdAt: ?any,
+  cases: ?Array<?Survey_cases>,
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: User
 // ====================================================
 
@@ -322,6 +541,40 @@ export type User = {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export type SurveyInput = {|
+  studentId?: ?string,
+  surveyorId?: ?string,
+  date?: ?any,
+  s1q1?: ?string,
+  s1q2?: ?string,
+  s1q3?: ?string,
+  s1q4?: ?string,
+  s1q5?: ?string,
+  s1q6?: ?string,
+  s1q7?: ?string,
+  s2q1?: ?string,
+  s2q2?: ?string,
+  s2q3?: ?string,
+  s2q4?: ?string,
+  s2q5?: ?string,
+  s2q6?: ?string,
+  s2q7?: ?string,
+  s2q8?: ?string,
+  s2q9?: ?string,
+  lowerD?: ?number,
+  lowerE?: ?number,
+  lowerF?: ?number,
+  upperD?: ?number,
+  upperM?: ?number,
+  upperF?: ?number,
+  cases?: ?Array<?CaseInput>,
+|};
+
+export type CaseInput = {|
+  toothNumber?: ?number,
+  diagnosisAndActionId?: ?string,
+|};
 
 //==============================================================
 // END Enums and Input Objects

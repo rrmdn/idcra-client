@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -185,6 +186,7 @@ class StudentPage extends React.Component<
                         <TableCell>Name</TableCell>
                         <TableCell>Date of Birth</TableCell>
                         <TableCell>Created At</TableCell>
+                        <TableCell>Actions</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -201,6 +203,13 @@ class StudentPage extends React.Component<
                             </TableCell>
                             <TableCell>{moment(node.dateOfBirth).format('D MMMM YYYY')}</TableCell>
                             <TableCell>{moment(node.createdAt).format('D MMMM YYYY')}</TableCell>
+                            <TableCell>
+                              <Link to={`/survey/${node.id}`}>
+                                <Button variant="outlined" className={classes.button}>
+                                  Survey
+                                </Button>
+                              </Link>
+                            </TableCell>
                           </TableRow>
                         );
                       })}
