@@ -142,9 +142,7 @@ const SessionForm = (props: {
               <FormControlLabel
                 control={
                   <Radio
-                    onClick={() =>
-                      question.low && props.onAnswer(props.session, 'Low', index)
-                    }
+                    onClick={() => question.low && props.onAnswer(props.session, 'Low', index)}
                     name={`${question.question}-${question.low}`}
                     aria-label={question.low}
                     color="primary"
@@ -172,9 +170,7 @@ const SessionForm = (props: {
               <FormControlLabel
                 control={
                   <Radio
-                    onClick={() =>
-                      question.high && props.onAnswer(props.session, 'High', index)
-                    }
+                    onClick={() => question.high && props.onAnswer(props.session, 'High', index)}
                     name={`${question.question}-${question.high}`}
                     aria-label={question.high}
                     color="secondary"
@@ -305,7 +301,7 @@ class SurveyPage extends React.Component<
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                   <Typography variant="title">DMF-T</Typography>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
                   <div style={{display: 'flex', flexDirection: 'column', padding: 24}}>
                     <TextField
                       id="d"
@@ -362,61 +358,63 @@ class SurveyPage extends React.Component<
                 <div style={{display: 'flex', justifyContent: 'center'}}>
                   <Typography variant="title">Preventive and Curative</Typography>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
                   <div style={{display: 'flex', flexDirection: 'column'}}>
                     {Array.from(this.state.cases.entries()).map(
                       ([toothNumber: number, DnAID: string]) => {
                         return (
-                          <div
-                            key={toothNumber}
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'row',
-                              alignItems: 'baseline',
-                              justifyContent: 'space-evenly',
-                            }}
-                          >
-                            <TextField
-                              id={`tooth-number-${toothNumber}`}
-                              label="Tooth Number"
-                              value={toothNumber}
-                              type="number"
-                              margin="normal"
-                            />
-                            <FormControl style={{minWidth: 200, margin: 10}}>
-                              <InputLabel htmlFor="diagnosis">Diagnosis</InputLabel>
-                              <Select
-                                inputProps={{
-                                  name: `diagnosis-${toothNumber}`,
-                                  id: `diagnosis-${toothNumber}`,
-                                }}
-                                onChange={e => {
-                                  this.setState(state => ({
-                                    cases: state.cases.set(toothNumber, e.target.value),
-                                  }));
-                                }}
-                                value={DnAID}
-                              >
-                                {DnALoading ? (
-                                  <MenuItem value="">
-                                    <em>Loading..</em>
-                                  </MenuItem>
-                                ) : null}
-                                {DnAData &&
-                                DnAData.diagnosisAndActions &&
-                                DnAData.diagnosisAndActions.edges
-                                  ? DnAData.diagnosisAndActions.edges.map(edge => {
-                                      if (!edge || !edge.node) return null;
-                                      const {node} = edge;
-                                      return (
-                                        <MenuItem key={node.id} value={node.id}>
-                                          {node.diagnosis}
-                                        </MenuItem>
-                                      );
-                                    })
-                                  : null}
-                              </Select>
-                            </FormControl>
+                          <div>
+                            <div
+                              key={toothNumber}
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'baseline',
+                                justifyContent: 'space-evenly',
+                              }}
+                            >
+                              <TextField
+                                id={`tooth-number-${toothNumber}`}
+                                label="Tooth Number"
+                                value={toothNumber}
+                                type="number"
+                                margin="normal"
+                              />
+                              <FormControl style={{minWidth: 200, margin: 10}}>
+                                <InputLabel htmlFor="diagnosis">Diagnosis</InputLabel>
+                                <Select
+                                  inputProps={{
+                                    name: `diagnosis-${toothNumber}`,
+                                    id: `diagnosis-${toothNumber}`,
+                                  }}
+                                  onChange={e => {
+                                    this.setState(state => ({
+                                      cases: state.cases.set(toothNumber, e.target.value),
+                                    }));
+                                  }}
+                                  value={DnAID}
+                                >
+                                  {DnALoading ? (
+                                    <MenuItem value="">
+                                      <em>Loading..</em>
+                                    </MenuItem>
+                                  ) : null}
+                                  {DnAData &&
+                                  DnAData.diagnosisAndActions &&
+                                  DnAData.diagnosisAndActions.edges
+                                    ? DnAData.diagnosisAndActions.edges.map(edge => {
+                                        if (!edge || !edge.node) return null;
+                                        const {node} = edge;
+                                        return (
+                                          <MenuItem key={node.id} value={node.id}>
+                                            {node.diagnosis}
+                                          </MenuItem>
+                                        );
+                                      })
+                                    : null}
+                                </Select>
+                              </FormControl>
+                            </div>
                             <TextField
                               disabled
                               value={(() => {
@@ -576,7 +574,7 @@ class SurveyPage extends React.Component<
               is taking a survey
             </Typography>
           </Toolbar>
-          <Stepper activeStep={this.state.activeSession}>
+          <Stepper activeStep={this.state.activeSession} orientation="vertical">
             <Step>
               <StepLabel>Get Ready!</StepLabel>
             </Step>

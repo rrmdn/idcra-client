@@ -18,6 +18,14 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import moment from 'moment-timezone';
 import debounce from 'debounce';
 import SchoolsQuery from '../School/SchoolQuery';
@@ -28,7 +36,7 @@ import CreateStudentMutation from './CreateStudentMutation';
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit,
     overflowX: 'auto',
   },
   table: {
@@ -164,7 +172,6 @@ class StudentPage extends React.Component<
                     </Paper>
                   )}
                 </CreateStudentMutation>
-
                 <Paper className={classes.root}>
                   <Toolbar
                     style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
@@ -180,47 +187,39 @@ class StudentPage extends React.Component<
                       />
                     </FormControl>
                   </Toolbar>
-                  <Table className={classes.table}>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Date of Birth</TableCell>
-                        <TableCell>Created At</TableCell>
-                        <TableCell>Actions</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {(studentsData && studentsData.students && studentsData.students.edges
-                        ? studentsData.students.edges
-                        : []
-                      ).map(edge => {
+
+                  <List>
+                    {studentsData && studentsData.students && studentsData.students.edges.length ? (
+                      studentsData.students.edges.map(edge => {
                         if (!edge || !edge.node) return null;
                         const {node} = edge;
                         return (
-                          <TableRow key={edge.cursor}>
-                            <TableCell component="th" scope="edge">
-                              {node.name}
-                            </TableCell>
-                            <TableCell>{moment(node.dateOfBirth).format('D MMMM YYYY')}</TableCell>
-                            <TableCell>{moment(node.createdAt).format('D MMMM YYYY')}</TableCell>
-                            <TableCell>
+                          <ListItem>
+                            <ListItemText
+                              primary={node.name}
+                              secondary={moment(node.dateOfBirth).format('D MMMM YYYY')}
+                            />
+                            <ListItemSecondaryAction>
                               <Link to={`/survey/${node.id}`}>
-                                <Button variant="outlined" className={classes.button}>
-                                  Take Survey
-                                </Button>
+                                <IconButton aria-label="Take Survey">
+                                  <Icon>format_list_numbered</Icon>
+                                </IconButton>
                               </Link>
-                              {' '}
                               <Link to={`/surveys/${node.id}`}>
-                                <Button variant="outlined" className={classes.button}>
-                                  Surveys
-                                </Button>
+                                <IconButton aria-label="Report">
+                                  <Icon>bar_chart</Icon>
+                                </IconButton>
                               </Link>
-                            </TableCell>
-                          </TableRow>
+                            </ListItemSecondaryAction>
+                          </ListItem>
                         );
-                      })}
-                    </TableBody>
-                  </Table>
+                      })
+                    ) : (
+                      <ListItem>
+                        <ListItemText primary={'There is no student in this school'} />
+                      </ListItem>
+                    )}
+                  </List>
                 </Paper>
               </div>
             )}
