@@ -106,6 +106,36 @@ export type createSchoolVariables = {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: schoolCost
+// ====================================================
+
+export type schoolCost_schoolCost = {
+  __typename: "CostReport",
+  description: string,
+  cost: number,
+};
+
+export type schoolCost_school = {
+  __typename: "School",
+  id: string,
+  name: ?string,
+};
+
+export type schoolCost = {
+  schoolCost: ?Array<?schoolCost_schoolCost>,
+  school: ?schoolCost_school,
+};
+
+export type schoolCostVariables = {
+  schoolID: string
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: schools
 // ====================================================
 

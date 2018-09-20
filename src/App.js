@@ -24,6 +24,7 @@ import './App.css';
 import RegisterPage from './Pages/Register/RegisterPage';
 import LoginPage from './Pages/Login/LoginPage';
 import SchoolPage from './Pages/School/SchoolPage';
+import SchoolCostPage from './Pages/School/SchoolCostPage';
 import StudentPage from './Pages/Student/StudentPage';
 import SurveyPage from './Pages/Survey/SurveyPage';
 import SurveysPage from './Pages/Survey/SurveysPage';
@@ -247,6 +248,7 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
               <Switch>
                 <PrivateRoute path="/" exact component={Home} />
                 <PrivateRoute path="/schools" exact component={SchoolPage} />
+                <PrivateRoute path="/schools/:schoolID/cost" exact component={SchoolCostPage} />
                 <PrivateRoute path="/students" exact component={StudentPage} />
                 <PrivateRoute path="/survey/:studentID" component={SurveyPage} />
                 <PrivateRoute path="/surveys/:studentID" component={SurveysPage} />

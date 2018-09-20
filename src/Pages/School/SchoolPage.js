@@ -1,12 +1,16 @@
 // @flow
-import React, {SyntheticEvent} from 'react';
+import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -62,8 +66,8 @@ class SchoolPage extends React.Component<
                       e.preventDefault();
                       create({variables: {name: this.state.newSchoolName}}).then(() => {
                         this.setState({newSchoolName: ''});
-                        refetchSchools()
-                      })
+                        refetchSchools();
+                      });
                     }}
                   >
                     {creatingSchool ? 'Creating...' : 'Create'}
@@ -78,30 +82,36 @@ class SchoolPage extends React.Component<
                   Schools
                 </Typography>
               </Toolbar>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>School Name</TableCell>
-                    <TableCell>Created At</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {(schoolsData && schoolsData.schools && schoolsData.schools.edges
-                    ? schoolsData.schools.edges
-                    : []
-                  ).map(edge => {
+              <List>
+                {schoolsData &&
+                schoolsData.schools &&
+                schoolsData.schools.edges &&
+                schoolsData.schools.edges.length ? (
+                  schoolsData.schools.edges.map(edge => {
                     if (!edge || !edge.node) return null;
+                    const {node} = edge;
                     return (
-                      <TableRow key={edge.cursor}>
-                        <TableCell component="th" scope="edge">
-                          {edge.node.name}
-                        </TableCell>
-                        <TableCell>{moment(edge.node.createdAt).format('D MMMM YYYY')}</TableCell>
-                      </TableRow>
+                      <ListItem>
+                        <ListItemText
+                          primary={node.name}
+                          secondary={moment(node.createdAt).format('D MMMM YYYY')}
+                        />
+                        <ListItemSecondaryAction>
+                          <Link to={`/schools/${node.id}/cost`}>
+                            <IconButton aria-label="Take Survey">
+                              <Icon>monetization_on</Icon>
+                            </IconButton>
+                          </Link>
+                        </ListItemSecondaryAction>
+                      </ListItem>
                     );
-                  })}
-                </TableBody>
-              </Table>
+                  })
+                ) : (
+                  <ListItem>
+                    <ListItemText primary={'There is no school'} />
+                  </ListItem>
+                )}
+              </List>
             </Paper>
           </div>
         )}
