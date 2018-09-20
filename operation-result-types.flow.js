@@ -369,6 +369,85 @@ export type studentVariables = {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: surveys
+// ====================================================
+
+export type surveys_surveys_edges_node_cases = {
+  __typename: "Case",
+  id: string,
+  surveyId: ?string,
+  toothNumber: ?number,
+  diagnosisAndActionId: ?string,
+  createdAt: ?any,
+};
+
+export type surveys_surveys_edges_node = {
+  __typename: "Survey",
+  id: string,
+  studentId: ?string,
+  surveyorId: ?string,
+  date: ?any,
+  s1q1: ?string,
+  s1q2: ?string,
+  s1q3: ?string,
+  s1q4: ?string,
+  s1q5: ?string,
+  s1q6: ?string,
+  s1q7: ?string,
+  s2q1: ?string,
+  s2q2: ?string,
+  s2q3: ?string,
+  s2q4: ?string,
+  s2q5: ?string,
+  s2q6: ?string,
+  s2q7: ?string,
+  s2q8: ?string,
+  s2q9: ?string,
+  lowerD: ?number,
+  lowerE: ?number,
+  lowerF: ?number,
+  upperD: ?number,
+  upperM: ?number,
+  upperF: ?number,
+  subjectiveScore: ?number,
+  createdAt: ?any,
+  cases: ?Array<?surveys_surveys_edges_node_cases>,
+};
+
+export type surveys_surveys_edges = {
+  __typename: "SurveysEdge",
+  cursor: string,
+  node: ?surveys_surveys_edges_node,
+};
+
+export type surveys_surveys_pageInfo = {
+  __typename: "PageInfo",
+  startCursor: ?string,
+  endCursor: ?string,
+  hasNextPage: boolean,
+};
+
+export type surveys_surveys = {
+  __typename: "SurveysConnection",
+  totalCount: number,
+  edges: ?Array<?surveys_surveys_edges>,
+  pageInfo: surveys_surveys_pageInfo,
+};
+
+export type surveys = {
+  surveys: surveys_surveys
+};
+
+export type surveysVariables = {
+  studentID: string
+};
+
+
+/* @flow */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: Case
 // ====================================================
 

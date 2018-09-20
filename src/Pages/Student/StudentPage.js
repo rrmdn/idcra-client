@@ -206,7 +206,13 @@ class StudentPage extends React.Component<
                             <TableCell>
                               <Link to={`/survey/${node.id}`}>
                                 <Button variant="outlined" className={classes.button}>
-                                  Survey
+                                  Take Survey
+                                </Button>
+                              </Link>
+                              {' '}
+                              <Link to={`/surveys/${node.id}`}>
+                                <Button variant="outlined" className={classes.button}>
+                                  Surveys
                                 </Button>
                               </Link>
                             </TableCell>
