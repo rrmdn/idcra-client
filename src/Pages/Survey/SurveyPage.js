@@ -546,16 +546,16 @@ class SurveyPage extends React.Component<
       case 4:
         return (
           <div>
-            <Typography>Done! Results will be available right away</Typography>
+            <Typography>Done!</Typography>
             <Button
               variant="contained"
               color="primary"
               onClick={() => {
                 // $FlowFixMe
-                this.props.history.push('/students');
+                this.props.history.push(`/surveys/${this.props.match.params.studentID}`);
               }}
             >
-              Take Another Survey
+              View Results
             </Button>
           </div>
         );
