@@ -67,7 +67,9 @@ class LoginPage extends Component<
     this.setState({loading: true});
     try {
       if (this.state.email && this.state.password) {
-        const {data: {access_token: accessToken}} = await axios.post(
+        const {
+          data: {access_token: accessToken},
+        } = await axios.post(
           `http://idcra.radityakertiyasa.com:3000/login`,
           {},
           {
@@ -93,9 +95,8 @@ class LoginPage extends Component<
       <CssBaseline />
       <main className={this.props.classes.layout}>
         <Paper className={this.props.classes.paper}>
-          <Avatar className={this.props.classes.avatar}>
-            <Icon>lock</Icon>
-          </Avatar>
+          <img style={{width: '100%'}} src={require('../Home/logo-idcra.png')} />
+          <br />
           <Typography variant="headline">Login</Typography>
           <form className={this.props.classes.form}>
             <FormControl margin="normal" required fullWidth>

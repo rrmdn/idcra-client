@@ -7,9 +7,9 @@ export default class SchoolCostQuery extends Query<schoolCost, schoolCostVariabl
   static query = gql`
     query schoolCost($schoolID: String!) {
       schoolCost: costBreakdownBySchoolAndDateRange(
-        schoolID: $schoolID
-        startDate: "08-08-2018"
-        endDate: "08-08-2019"
+        schoolID: $schoolID,
+        startDate: "2018-08-08",
+        endDate: "2019-08-08"
       ) {
         description
         cost

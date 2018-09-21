@@ -28,6 +28,7 @@ import SchoolCostPage from './Pages/School/SchoolCostPage';
 import StudentPage from './Pages/Student/StudentPage';
 import SurveyPage from './Pages/Survey/SurveyPage';
 import SurveysPage from './Pages/Survey/SurveysPage';
+import HomePage from './Pages/Home/HomePage';
 
 const NavigationLink = (props: {
   to: string,
@@ -246,7 +247,7 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
             <main className={classes.content}>
               <div className={classes.appBarSpacer} />
               <Switch>
-                <PrivateRoute path="/" exact component={Home} />
+                <PrivateRoute path="/" exact component={HomePage} />
                 <PrivateRoute path="/schools" exact component={SchoolPage} />
                 <PrivateRoute path="/schools/:schoolID/cost" exact component={SchoolCostPage} />
                 <PrivateRoute path="/students" exact component={StudentPage} />

@@ -65,7 +65,7 @@ class SchoolPage extends React.Component<
                 schoolCostData.schoolCost.map(cost => {
                   return (
                     <ListItem key={cost.description}>
-                      <ListItemText primary={cost.description} secondary={cost.cost} />
+                      <ListItemText primary={cost.description} secondary={`IDR ${cost.cost}`} />
                     </ListItem>
                   );
                 })
