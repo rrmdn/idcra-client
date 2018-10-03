@@ -7462,6 +7462,10 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-values@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-values/-/react-values-0.3.0.tgz#ae592c368ea50bfa6063029e31430598026f5287"
+
 react@^16.4.0, react@^16.5.0:
   version "16.5.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.0.tgz#f2c1e754bf9751a549d9c6d9aca41905beb56575"
