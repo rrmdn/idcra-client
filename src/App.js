@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -189,6 +190,12 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
     this.setState({open: false});
   };
 
+  handleLogout = () => {
+    cookie.remove('email');
+    cookie.remove('token');
+    window.location.href = '/login';
+  };
+
   render() {
     const {classes} = this.props;
 
@@ -219,9 +226,16 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
                 <Typography variant="title" color="inherit" noWrap className={classes.title}>
                   IDCRA
                 </Typography>
-                <IconButton color="inherit">
-                  <Icon>notifications</Icon>
-                </IconButton>
+                {cookie.get('token') ? (
+                  <Button
+                    onClick={this.handleLogout}
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    Logout
+                  </Button>
+                ) : null}
               </Toolbar>
             </AppBar>
             {cookie.get('token') ? (
