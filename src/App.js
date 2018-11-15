@@ -197,6 +197,7 @@ class Dashboard extends React.Component<{}, {open: boolean}> {
   };
 
   render() {
+    // $FlowFixMe
     const {classes} = this.props;
 
     return (

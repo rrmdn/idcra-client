@@ -101,6 +101,7 @@ class RegisterPage extends Component<
                           password: this.state.password,
                         },
                       }).then(() => {
+                        // $FlowFixMe
                         this.props.history.push('/login');
                       });
                     }
