@@ -254,7 +254,9 @@ export default class SurveysPage extends React.Component<{}> {
                             <ul>
                               {Object.keys(output.operator).map(key => (
                                 <li>
-                                  <Typography>{key.toUpperCase()}: {output.operator[key]}</Typography>
+                                  <Typography>
+                                    {key.toUpperCase()}: {output.operator[key]}
+                                  </Typography>
                                 </li>
                               ))}
                             </ul>
@@ -369,6 +371,7 @@ export default class SurveysPage extends React.Component<{}> {
                       <Label value="Date" offset={-2} position="insideBottom" />
                     </XAxis>
                     <YAxis
+                      reversed
                       type="number"
                       unit="%"
                       ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
